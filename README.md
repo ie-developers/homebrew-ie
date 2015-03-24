@@ -4,10 +4,10 @@ Cached formulas for ie-ryukyu (The Department of Information Engineering, Univer
 
 ## Usage
 
-`` $ brew tap ie-developers/ie ``
-`` $ brew install ie-developers/ie/formula_name ``
+- `` $ brew tap ie-developers/ie ``
+- `` $ brew install ie-developers/ie/formula_name ``
 
 ## Example
-`` $ brew install ie-developers/ie/mercurial ``
-`` $ brew install caskroom/cask/brew-cask ``
-`` $ brew cask install ie-developers/ie/mactex ``
+- `` $ brew install ie-developers/ie/mercurial ``
+- `` $ brew install caskroom/cask/brew-cask ``
+- `` $ brew cask install ie-developers/ie/mactex ``
