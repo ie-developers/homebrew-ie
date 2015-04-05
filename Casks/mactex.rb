@@ -5,7 +5,7 @@ cask :v1 => 'mactex' do
   # ctan.org is the official download host per the vendor homepage
   # http://mirror.ctan.org/systems/mac/mactex/mactex-#{version}.pkg
   # cached by ie
-  url "http://urasoe.ie.u-ryukyu.ac.jp/~e115763/caches/mactex-#{version}.pkg"
+  url "http://wolf.cr.ie.u-ryukyu.ac.jp/caches/mactex-#{version}.pkg"
   name 'MacTeX'
   homepage 'http://www.tug.org/mactex/'
   license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
