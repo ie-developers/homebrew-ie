@@ -24,6 +24,16 @@ class Cbc < Formula
     # system "cmake", ".", *std_cmake_args
     system "make -j 2" # if this fails, try separate make/make install steps
     system "make", "install"
+    Dir["#{bin}/*"].each do |file|
+      add_prefix(file, 'cbc')
+    end
+  end
+
+  def add_prefix(file, prefix)
+    dir = File.dirname(file)
+    ext = File.extname(file)
+    base = File.basename(file, ext)
+    File.rename file, "#{dir}/#{prefix}-#{base}#{ext}"
   end
 
   test do
