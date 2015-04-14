@@ -4,8 +4,9 @@
 
 class Cbc < Formula
   homepage ""
-  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
-  version "llvm"
+  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg, tag: "LLVM3.7"
+  head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
+  version "llvm3.7"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
 
   # depends_on "cmake" => :build
@@ -22,7 +23,7 @@ class Cbc < Formula
                           "--enable-assertions"
     # system "cmake", ".", *std_cmake_args
     system "make -j 2" # if this fails, try separate make/make install steps
-    system "make install"
+    system "make", "install"
   end
 
   test do
