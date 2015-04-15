@@ -3,7 +3,7 @@
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 
 class Cbc < Formula
-  homepage ""
+  homepage "http://www.cr.ie.u-ryukyu.ac.jp"
   url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg, tag: "LLVM3.7"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
   version "llvm3.7"
