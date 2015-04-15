@@ -16,24 +16,13 @@ class Cbc < Formula
     # ENV.deparallelize  # if your formula fails when building in parallel
 
     # Remove unrecognized options if warned by configure
-    system "./configure", "--prefix=#{prefix}",
+    system "./configure", "--prefix=#{libexec}",
                           "--disable-optimized",
-                          "--enable-debug-runtime",
-                          "--enable-debug-symbols",
                           "--enable-assertions"
     # system "cmake", ".", *std_cmake_args
     system "make -j 2" # if this fails, try separate make/make install steps
     system "make", "install"
-    Dir["#{bin}/*"].each do |file|
-      add_prefix(file, 'cbc')
-    end
-  end
-
-  def add_prefix(file, prefix)
-    dir = File.dirname(file)
-    ext = File.extname(file)
-    base = File.basename(file, ext)
-    File.rename file, "#{dir}/#{prefix}-#{base}#{ext}"
+    bin.install_symlink "#{libexec}/bin/clang" => "cbc-clang"
   end
 
   test do
