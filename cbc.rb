@@ -4,7 +4,7 @@
 
 class Cbc < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
-  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg, tag: "LLVM3.7"
+  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg, revision: "99580de8d21d"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
   version "llvm3.7"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
