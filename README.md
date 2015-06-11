@@ -1,7 +1,7 @@
 ## homebrew-ie
 
-Customized formulas for ie-ryukyu (The Department of Information Engineering, University of the Ryukyus).
-It contains formulas of software which hosted by ie-ryukyu and cached formulas to PC-setup for new members.
+Customized formulae for ie-ryukyu (The Department of Information Engineering, University of the Ryukyus).
+It contains formulae of software which hosted by ie-ryukyu and cached formulae to PC-setup for new members.
 
 ## Usage : Install software by ie-ryukyu
 
