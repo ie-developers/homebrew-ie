@@ -7,7 +7,7 @@ class Treevnc < Formula
   url "http://www.cr.ie.u-ryukyu.ac.jp/hg/Applications/TreeVNC", using: :hg
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/Applications/TreeVNC", using: :hg
   version "1.0.0"
-  sha256 ""
+  sha256 "c8fce0c77636927f800fd12115fcca4ac7c598e6149e314ac2ab16df00328041"
 
   depends_on "gradle" => :build
   depends_on java: "1.8"
@@ -15,6 +15,7 @@ class Treevnc < Formula
 
   def install
     system "gradle", "installAPP"
-    bin.install_symlink "#{prefix}/build/install/TreeVNC/bin/TreeVNC" => "treeVNC"
+    system "mv", "#{buildpath}/build/install/TreeVNC", "#{libexec}"
+    bin.install_symlink "#{libexec}/bin/TreeVNC" => "treeVNC"
   end
 end
