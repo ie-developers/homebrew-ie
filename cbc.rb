@@ -22,12 +22,14 @@ class Cbc < Formula
     # ENV.deparallelize  # if your formula fails when building in parallel
 
     # Remove unrecognized options if warned by configure
-    system "./configure", "--prefix=#{libexec}",
-                          "--disable-optimized",
-                          "--enable-assertions"
-    # system "cmake", ".", *std_cmake_args
-    system "make -j 2" # if this fails, try separate make/make install steps
-    system "make", "install"
+    mktemp do
+      system "#{buildpath}/configure", "--prefix=#{prefix}",
+                            "--disable-optimized",
+                            "--enable-assertions"
+      # system "cmake", ".", *std_cmake_args
+      system "make -j 2" # if this fails, try separate make/make install steps
+      system "make", "install"
+    end
     bin.install_symlink "#{libexec}/bin/clang" => "cbc-clang"
   end
 end
