@@ -6,10 +6,10 @@ class LlvmOriginal < Formula
   depends_on :x11 # if your formula requires any X11/XQuartz components
 
   def install
-    mktemp do
+    mkdir("#{prefix}/build") do
       system "#{buildpath}/configure", "--prefix=#{prefix}",
-                            "--disable-optimized", "--enable-assertions",
-                            "--enable-debug-runtime", "--enable-debug-symbols"
+                            "--enable-debug-runtime", "--enable-debug-symbols",
+                            "--disable-optimized", "--enable-assertions"
       system "make -j 2"
       system "make", "install"
     end
