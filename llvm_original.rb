@@ -3,7 +3,11 @@ class LlvmOriginal < Formula
   url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/LLVM_original", using: :hg
   version "llvm3.8"
 
-  depends_on :x11 # if your formula requires any X11/XQuartz components
+  bottle do
+    cellar :any
+    root_url 'http://www.ie.u-ryukyu.ac.jp/brew'
+    sha256 "20af48c4ef50e776b0b894d15d6d517808214c5126be463019519b5f457bdcfe" => :yosemite
+  end
 
   def install
     mkdir("#{prefix}/build") do
