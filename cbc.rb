@@ -15,21 +15,12 @@ class Cbc < Formula
   end
 
 
-  # depends_on "cmake" => :build
-  depends_on :x11 # if your formula requires any X11/XQuartz components
-
   def install
-    # ENV.deparallelize  # if your formula fails when building in parallel
-
-    # Remove unrecognized options if warned by configure
     mktemp do
-      system "#{buildpath}/configure", "--prefix=#{prefix}",
-                            "--disable-optimized",
-                            "--enable-assertions"
-      # system "cmake", ".", *std_cmake_args
-      system "make -j 2" # if this fails, try separate make/make install steps
+      system "#{buildpath}/configure", "--prefix=#{prefix}", "--enable-assertions"
+      system "make -j 2"
       system "make", "install"
     end
-    bin.install_symlink "#{libexec}/bin/clang" => "cbc-clang"
+    bin.install_symlink "#{prefix}/bin/clang" => "cbc-clang"
   end
 end
