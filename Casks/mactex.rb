@@ -5,7 +5,7 @@ cask 'mactex' do
   # ctan.org is the official download host per the vendor homepage
   # http://mirror.ctan.org/systems/mac/mactex/mactex-#{version}.pkg
   # cached by ie
-  url "http://wolf.cr.ie.u-ryukyu.ac.jp/caches/MacTex.pkg"
+  url "http://www.ie.u-ryukyu.ac.jp/brew/MacTex.pkg"
   name 'MacTeX'
   homepage 'http://www.tug.org/mactex/'
   license :oss
