@@ -1,4 +1,4 @@
-cask :v1 => 'mactex' do
+cask 'mactex' do
   version '20140525'
   sha256 '4e7fc21dbddae436f604dbeb3db2dc13c44aa9e2dd827a669a170418e84fc7e6'
 
