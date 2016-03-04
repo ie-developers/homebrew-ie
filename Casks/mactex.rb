@@ -1,16 +1,16 @@
-cask :v1 => 'mactex' do
-  version '20140525'
-  sha256 '4e7fc21dbddae436f604dbeb3db2dc13c44aa9e2dd827a669a170418e84fc7e6'
+cask 'mactex' do
+  version '20150613'
+  sha256 'c5f5b0fd853a17dab6e844fb5e893804af78d938fa18ee94ec3b257611a95c12'
 
   # ctan.org is the official download host per the vendor homepage
   # http://mirror.ctan.org/systems/mac/mactex/mactex-#{version}.pkg
   # cached by ie
-  url "http://wolf.cr.ie.u-ryukyu.ac.jp/caches/mactex-#{version}.pkg"
+  url "http://www.ie.u-ryukyu.ac.jp/brew/MacTex.pkg"
   name 'MacTeX'
   homepage 'http://www.tug.org/mactex/'
-  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
+  license :oss
 
-  pkg "mactex-#{version}.pkg"
+  pkg "MacTex.pkg"
 
   uninstall :pkgutil => [
                          'org.tug.mactex.ghostscript9.10',
@@ -19,9 +19,8 @@ cask :v1 => 'mactex' do
                         ],
             :delete  => [
                          '/Applications/TeX',
+                         '/Library/PreferencePanes/TeXDistPrefPane.prefPane',
                          '/etc/paths.d/TeX',
+                         '/etc/manpaths.d/TeX',
                         ]
-  caveats do
-    zsh_path_helper '/usr/texbin'
-  end
 end
