@@ -1,26 +1,39 @@
+# No head build supported; if you need head builds of Mercurial, do so outside
+# of Homebrew.
 class Mercurial < Formula
   desc "Scalable distributed version control system"
   homepage "https://mercurial-scm.org/"
-  url "https://mercurial-scm.org/release/mercurial-4.0.2.tar.gz"
-  sha256 "ae6659dba27508a9a6417d535a89e282d5c8a5ea77b6e00af102822145b06d02"
+  url "https://mercurial-scm.org/release/mercurial-4.2.tar.gz"
+  sha256 "23a412308fc9c2b354a0e91a89588a4af2af061b47da80bc4233ccb0cceef47d"
 
   bottle do
-    cellar :any
     root_url "http://ie.u-ryukyu.ac.jp/brew"
-    sha256 "20f193ea1672ab2126fe9de7055cc95f0115e49ba4a8b6d896f0e33d1cbf1691" => :sierra
-    sha256 "bf107e7f54ef8478ee6dd2268f96edce6ea6c54fce01f02e89795fd000442d97" => :el_capitan
-    sha256 "a5859696439b125ee70e98cd03ee44e75310f255a7ad1ecafe5db3945cf0b168" => :yosemite
+    sha256 "4d7acb8d2c9c1c291dd18b1241df9b6388932e22b9a969b4dde6e349c80fae70" => :sierra
+    sha256 "137cdc81122d4288aaab7a372663cdf6d5829b488f394ee3f72591851d98b512" => :el_capitan
+    sha256 "c131d38c0534b6553f52317023786fbb4a9a2e08266e8233ffdb5180dee129c5" => :yosemite
   end
 
   option "with-custom-python", "Install against the python in PATH instead of Homebrew's python"
-  if build.with? "custom-python"
-    depends_on :python
-  else
-    depends_on "python"
-  end
+  depends_on :python
 
   def install
     system "make", "PREFIX=#{prefix}", "install-bin"
+
+    # Install chg (see https://www.mercurial-scm.org/wiki/CHg)
+    cd "contrib/chg" do
+      system "make", "PREFIX=#{prefix}", "HGPATH=#{bin}/hg", \
+             "HG=#{bin}/hg"
+      bin.install "chg"
+    end
+
+    # Configure a nicer default pager
+    (buildpath/"hgrc").write <<-EOS.undent
+      [pager]
+      pager = less -FRX
+    EOS
+
+    (etc/"mercurial").install "hgrc"
+
     # Install man pages, which come pre-built in source releases
     man1.install "doc/hg.1"
     man5.install "doc/hgignore.5", "doc/hgrc.5"
@@ -48,4 +61,3 @@ class Mercurial < Formula
     system "#{bin}/hg", "init"
   end
 end
-
