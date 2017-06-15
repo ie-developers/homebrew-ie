@@ -1,21 +1,22 @@
 cask 'mactex' do
-  version '20161009'
-  sha256 'b44873d445881900401d0e0eddccc78140b9ed51b538364889eb8529350d5bd7'
+  version '20170524'
+  sha256 '0caf76027c9e0534a0b636f2b880ace4a0463105a7ad5774ccacede761be8c2d'
 
   url "http://www.ie.u-ryukyu.ac.jp/brew/mactex-#{version}.pkg"
+  appcast 'https://www.tug.org/mactex/downloading.html',
+          checkpoint: 'dcfb71e2918169fbd0a270994e722db3447fe1727fdff10a016db92c4f9492c1'
   name 'MacTeX'
   homepage 'https://www.tug.org/mactex/'
-  license :oss
 
   pkg "mactex-#{version}.pkg"
 
   uninstall pkgutil: [
-                       'org.tug.mactex.ghostscript9.19',
-                       'org.tug.mactex.gui2016',
-                       'org.tug.mactex.texlive2016',
+                       'org.tug.mactex.ghostscript9.21',
+                       'org.tug.mactex.gui2017',
+                       'org.tug.mactex.texlive2017',
                      ],
             delete:  [
-                       '/usr/local/texlive/2016',
+                       '/usr/local/texlive/2017',
                        '/Applications/TeX',
                        '/Library/PreferencePanes/TeXDistPrefPane.prefPane',
                        '/etc/paths.d/TeX',
@@ -38,7 +39,7 @@ cask 'mactex' do
                 '~/Library/Preferences/fr.chachatelier.pierre.LaTeXiT.plist',
                 '~/Library/Preferences/TeXShop.plist',
                 '~/Library/Saved Application State/edu.bucknell.Excalibur.savedState',
-                '~/Library/texlive/2016',
+                '~/Library/texlive/2017',
                 '~/Library/TeXShop',
               ],
       rmdir:  [
