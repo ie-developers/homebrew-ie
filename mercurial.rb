@@ -3,20 +3,20 @@
 class Mercurial < Formula
   desc "Scalable distributed version control system"
   homepage "https://mercurial-scm.org/"
-  url "https://mercurial-scm.org/release/mercurial-4.2.tar.gz"
-  sha256 "23a412308fc9c2b354a0e91a89588a4af2af061b47da80bc4233ccb0cceef47d"
+  url "https://www.mercurial-scm.org/release/mercurial-4.9.1.tar.gz"
+  sha256 "1bdd21bb87d1e05fb5cd395d488d0e0cc2f2f90ce0fd248e31a03595da5ccb47"
 
   bottle do
-    root_url "http://ie.u-ryukyu.ac.jp/brew"
-    sha256 "4d7acb8d2c9c1c291dd18b1241df9b6388932e22b9a969b4dde6e349c80fae70" => :sierra
-    sha256 "137cdc81122d4288aaab7a372663cdf6d5829b488f394ee3f72591851d98b512" => :el_capitan
-    sha256 "c131d38c0534b6553f52317023786fbb4a9a2e08266e8233ffdb5180dee129c5" => :yosemite
+    sha256 "8246e13f5e8eeabcae470b1b35cb8c2d8eb35aadc2ee70c9355d2bd0773e955b" => :mojave
+    sha256 "0c9dbdc13f157d77814a9f533495212c6ce1d9575dbf3b0a8f4fdc1057442e64" => :high_sierra
+    sha256 "282a1569ea5935fa7a3481571c8030e4f2d0f089c45368893e9c4904b256523a" => :sierra
   end
 
-  option "with-custom-python", "Install against the python in PATH instead of Homebrew's python"
-  depends_on :python
+  depends_on "python@2" # does not support Python 3
 
   def install
+    ENV.prepend_path "PATH", Formula["python@2"].opt_libexec/"bin"
+
     system "make", "PREFIX=#{prefix}", "install-bin"
 
     # Install chg (see https://www.mercurial-scm.org/wiki/CHg)
@@ -27,7 +27,7 @@ class Mercurial < Formula
     end
 
     # Configure a nicer default pager
-    (buildpath/"hgrc").write <<-EOS.undent
+    (buildpath/"hgrc").write <<~EOS
       [pager]
       pager = less -FRX
     EOS
@@ -45,9 +45,11 @@ class Mercurial < Formula
 
   def caveats
     return unless (opt_bin/"hg").exist?
+
     cacerts_configured = `#{opt_bin}/hg config web.cacerts`.strip
     return if cacerts_configured.empty?
-    <<-EOS.undent
+
+    <<~EOS
       Homebrew has detected that Mercurial is configured to use a certificate
       bundle file as its trust store for TLS connections instead of using the
       default OpenSSL store. If you have trouble connecting to remote
@@ -61,3 +63,4 @@ class Mercurial < Formula
     system "#{bin}/hg", "init"
   end
 end
+
