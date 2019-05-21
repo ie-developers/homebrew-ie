@@ -1,49 +1,79 @@
 cask 'mactex' do
-  version '20170524'
-  sha256 '0caf76027c9e0534a0b636f2b880ace4a0463105a7ad5774ccacede761be8c2d'
+  version '2019.0508'
+  sha256 'ce6fa6d3ec5a4058d5889cfc36bf634fd8a5aefb6601d10c853e5f5d76455f4a'
 
-  url "http://www.ie.u-ryukyu.ac.jp/brew/mactex-#{version}.pkg"
-  appcast 'https://www.tug.org/mactex/downloading.html',
-          checkpoint: 'dcfb71e2918169fbd0a270994e722db3447fe1727fdff10a016db92c4f9492c1'
+  url "https://ie.u-ryukyu.ac.jp/brew/mactex-#{version.no_dots}.pkg"
+  appcast 'https://www.tug.org/mactex/downloading.html'
   name 'MacTeX'
   homepage 'https://www.tug.org/mactex/'
 
-  pkg "mactex-#{version}.pkg"
+  conflicts_with cask: [
+                         'basictex',
+                         'mactex-no-gui',
+                       ]
+  depends_on formula: 'ghostscript'
+  depends_on macos: '>= :sierra'
+
+  pkg "mactex-#{version.no_dots}.pkg",
+      choices: [
+                 {
+                   # TeXLive
+                   'choiceIdentifier' => 'choice1',
+                   'choiceAttribute'  => 'selected',
+                   'attributeSetting' => 1,
+                 },
+                 {
+                   # GUI-Applications
+                   'choiceIdentifier' => 'choice2',
+                   'choiceAttribute'  => 'selected',
+                   'attributeSetting' => 1,
+                 },
+                 {
+                   # Ghostscript
+                   'choiceIdentifier' => 'choice3',
+                   'choiceAttribute'  => 'selected',
+                   'attributeSetting' => 0,
+                 },
+               ]
 
   uninstall pkgutil: [
-                       'org.tug.mactex.ghostscript9.21',
-                       'org.tug.mactex.gui2017',
-                       'org.tug.mactex.texlive2017',
+                       "org.tug.mactex.gui#{version.major}",
+                       "org.tug.mactex.texlive#{version.major}",
                      ],
             delete:  [
-                       '/usr/local/texlive/2017',
+                       "/usr/local/texlive/#{version.major}",
                        '/Applications/TeX',
-                       '/Library/PreferencePanes/TeXDistPrefPane.prefPane',
+                       '/Library/TeX',
                        '/etc/paths.d/TeX',
                        '/etc/manpaths.d/TeX',
                      ]
 
-  zap delete: [
-                '/usr/local/texlive/texmf-local',
-                '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/texshop.sfl',
-                '~/Library/Application Support/BibDesk',
-                '~/Library/Application Support/TeXShop',
-                '~/Library/Application Support/TeX Live Utility',
-                '~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/TeXShop.help',
-                '~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/edu.ucsd.cs.mmccrack.bibdesk.help',
-                '~/Library/Caches/edu.ucsd.cs.mmccrack.bibdesk',
-                '~/Library/Caches/fr.chachatelier.pierre.LaTeXiT',
-                '~/Library/Caches/TeXShop',
-                '~/Library/Preferences/edu.ucsd.cs.mmccrack.bibdesk.plist',
-                '~/Library/Preferences/Excalibur Preferences',
-                '~/Library/Preferences/fr.chachatelier.pierre.LaTeXiT.plist',
-                '~/Library/Preferences/TeXShop.plist',
-                '~/Library/Saved Application State/edu.bucknell.Excalibur.savedState',
-                '~/Library/texlive/2017',
-                '~/Library/TeXShop',
-              ],
-      rmdir:  [
-                '/usr/local/texlive',
-                '~/Library/texlive',
-              ]
+  zap trash: [
+               '/usr/local/texlive/texmf-local',
+               "~/Library/texlive/#{version.major}",
+               # TexShop:
+               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/texshop.sfl*',
+               '~/Library/Application Support/TeXShop',
+               '~/Library/Caches/com.apple.helpd/Generated/TeXShop Help*',
+               '~/Library/Caches/TeXShop',
+               '~/Library/Preferences/TeXShop.plist',
+               '~/Library/TeXShop',
+               # BibDesk:
+               '~/Library/Application Support/BibDesk',
+               '~/Library/Caches/com.apple.helpd/Generated/edu.ucsd.cs.mmccrack.bibdesk.help*',
+               '~/Library/Caches/edu.ucsd.cs.mmccrack.bibdesk',
+               '~/Library/Cookies/edu.ucsd.cs.mmccrack.bibdesk.binarycookies',
+               '~/Library/Preferences/edu.ucsd.cs.mmccrack.bibdesk.plist',
+               # LaTeXiT:
+               '~/Library/Caches/fr.chachatelier.pierre.LaTeXiT',
+               '~/Library/Cookies/fr.chachatelier.pierre.LaTeXiT.binarycookies',
+               '~/Library/Preferences/fr.chachatelier.pierre.LaTeXiT.plist',
+               # TeX Live Utility:
+               '~/Library/Application Support/TeX Live Utility',
+               '~/Library/Caches/com.apple.helpd/Generated/TeX Live Utility Help*',
+             ],
+      rmdir: [
+               '/usr/local/texlive',
+               '~/Library/texlive',
+             ]
 end
