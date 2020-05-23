@@ -14,13 +14,12 @@ class Cbcgccarm < Formula
 
   def install
     mktemp do
-      system "#{buildpath}/configure", "--taget=arm-elf-eabi", "--prefix=#{prefix}", "--disable-nls" ,  "--disable-bootstrap","--enable-checking=tree,rtl,assert,types","CFLAGS=-g3 -O0", "--enable-languages=c,lto", "--no-create", "--no-recursion", "--disable-multilib" , "--disable-werror"
+      system "#{buildpath}/configure", "--target=arm-elf-eabi", "--prefix=#{prefix}", "--disable-nls" ,  "--disable-bootstrap","--enable-checking=tree,rtl,assert,types","CFLAGS=-g3 -O0", "--enable-languages=c,lto", "--no-create", "--no-recursion", "--disable-multilib" , "--disable-werror"
       system "sh config.status"
       system "make -j 4"
       system "make", "install"
     end
   end
-  #   cbcgcc-10.0.1.
   bottle do
     rebuild 1
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
