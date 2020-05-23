@@ -20,6 +20,15 @@ class Cbcgcc < Formula
   depends_on "libmpc"
   depends_on "isl"
 
+  def version_suffix
+    if build.head?
+      "HEAD"
+    else
+      version.to_s.slice(/\d/)
+    end
+  end
+
+
   def install
     mktemp do
 
