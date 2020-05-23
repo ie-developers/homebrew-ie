@@ -24,7 +24,7 @@ class Cbcgcc < Formula
     if build.head?
       "HEAD"
     else
-      version.to_s.slice(/\d/)
+      version.to_s.slice(/\d+/)
     end
   end
 
