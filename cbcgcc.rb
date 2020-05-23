@@ -3,12 +3,12 @@
 
 class Cbcgcc < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
-  url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg, revision: "21681fa9647e"
+  url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg, revision: "current"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
-  version "llvm3.8"
+  version "cbc-10.0.1"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
 
-  keg_only "Conflict with original clang"
+#   keg_only "Conflict with original clang"
 
   def install
     mktemp do
