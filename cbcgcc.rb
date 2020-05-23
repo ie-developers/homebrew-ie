@@ -27,7 +27,7 @@ class Cbcgcc < Formula
       --disable-nls
       --disable-bootstrap
       --enable-checking=tree,rtl,assert,types
-      CFLAGS=-g3 -O0
+      CFLAGS="-g3 -O0"
       --enable-languages=c,lto
       --no-create
       --no-recursion
