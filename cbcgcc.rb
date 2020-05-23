@@ -21,7 +21,32 @@ class Cbcgcc < Formula
 
   def install
     mktemp do
-      system "#{buildpath}/configure", "--prefix=#{prefix}", "--disable-nls" ,  "--disable-bootstrap","--enable-checking=tree,rtl,assert,types","CFLAGS=-g3 -O0", "--enable-languages=c,lto", "--no-create", "--no-recursion", "--disable-multilib"
+
+    args = %W[
+      --prefix=#{prefix}
+      --disable-nls
+      --disable-bootstrap
+      --enable-checking=tree,rtl,assert,types
+      CFLAGS=-g3 -O0
+      --enable-languages=c,lto
+      --no-create
+      --no-recursion
+      --disable-multilib
+    ]
+
+
+    # Xcode 10 dropped 32-bit support
+    args << "--disable-multilib" if DevelopmentTools.clang_build_version >= 1000
+
+    # System headers may not be in /usr/include
+    sdk = MacOS.sdk_path_if_needed
+    if sdk
+      args << "--with-native-system-header-dir=/usr/include"
+      args << "--with-sysroot=#{sdk}"
+    end
+
+
+      system "#{buildpath}/configure", *args
       system "sh config.status"
       system "make -j 4"
       system "make", "install"
