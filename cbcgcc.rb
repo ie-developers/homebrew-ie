@@ -31,6 +31,11 @@ class Cbcgcc < Formula
       --no-create
       --no-recursion
       --disable-multilib
+      --with-gmp=#{Formula["gmp"].opt_prefix}
+      --with-mpfr=#{Formula["mpfr"].opt_prefix}
+      --with-mpc=#{Formula["libmpc"].opt_prefix}
+      --with-isl=#{Formula["isl"].opt_prefix}
+
     ]
 
     args << "CFLAGS=-g3 -O0"
@@ -43,7 +48,6 @@ class Cbcgcc < Formula
     if sdk
       args << "--with-native-system-header-dir=/usr/include"
       args << "--with-sysroot=#{sdk}"
-      system "contrib/download_prerequisites" 
     end
 
 
