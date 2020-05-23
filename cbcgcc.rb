@@ -18,6 +18,7 @@ class Cbcgcc < Formula
   depends_on"gmp"
   depends_on "mpfr"
   depends_on "libmpc"
+  depends_on "isl"
 
   def install
     mktemp do
@@ -49,6 +50,13 @@ class Cbcgcc < Formula
       args << "--with-native-system-header-dir=/usr/include"
       args << "--with-sysroot=#{sdk}"
     end
+
+        # Avoid reference to sed shim
+    args << "SED=/usr/bin/sed"
+
+    # Ensure correct install names when linking against libgcc_s;
+    # see discussion in https://github.com/Homebrew/legacy-homebrew/pull/34303
+    inreplace "libgcc/config/t-slibgcc-darwin", "@shlib_slibdir@", "#{HOMEBREW_PREFIX}/lib/gcc/#{version_suffix}"
 
 
       system "#{buildpath}/configure", *args
