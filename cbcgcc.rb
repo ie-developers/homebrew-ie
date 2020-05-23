@@ -27,13 +27,13 @@ class Cbcgcc < Formula
       --disable-nls
       --disable-bootstrap
       --enable-checking=tree,rtl,assert,types
-      CFLAGS="-g3 -O0"
       --enable-languages=c,lto
       --no-create
       --no-recursion
       --disable-multilib
     ]
 
+    args << "CFLAGS=-g3 -O0"
 
     # Xcode 10 dropped 32-bit support
     args << "--disable-multilib" if DevelopmentTools.clang_build_version >= 1000
