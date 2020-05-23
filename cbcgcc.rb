@@ -25,8 +25,9 @@ class Cbcgcc < Formula
   bottle do
     rebuild 1
     root_url "https://cr.ie.u-ryukyu.ac.jp/brew/" # Optional root to calculate bottle URLs
-    sha256 "edc5ec271841a8b8558f8d60ef510c7d7abc91e91cc4fb0422389fad99073857" => :mojave
+    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :mojave
   end
+
 
   def pour_bottle?
     # Only needed if this formula has to check if using the pre-built
