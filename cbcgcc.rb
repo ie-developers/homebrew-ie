@@ -43,6 +43,7 @@ class Cbcgcc < Formula
     if sdk
       args << "--with-native-system-header-dir=/usr/include"
       args << "--with-sysroot=#{sdk}"
+      system "contrib/download_prerequisites" 
     end
 
 
