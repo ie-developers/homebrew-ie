@@ -12,7 +12,7 @@ class Cbcgcc < Formula
 
   def install
     mktemp do
-      system "#{buildpath}/configure", "--prefix=#{prefix}", "--disable-nls" ,  "--disable-bootstrap","--enable-checking=tree,rtl,assert,types","CFLAGS=\"-g3 -O0\"", "--enable-languages=c,lto", "--no-create", "--no-recursion", "--disable-multilib"
+      system "#{buildpath}/configure", "--prefix=#{prefix}", "--disable-nls" ,  "--disable-bootstrap","--enable-checking=tree,rtl,assert,types","CFLAGS=-g3 -O0", "--enable-languages=c,lto", "--no-create", "--no-recursion", "--disable-multilib"
       system "make -j 4"
       system "make", "install"
     end
