@@ -5,10 +5,13 @@ class Cbcgcc < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
   url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg, revision: "current"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
-  version "cbc-10.0.1"
+  version "10.0.1"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
 
-#   keg_only "Conflict with original clang"
+  keg_only "Conflict with various gcc"
+  depends_on"gmp"
+  depends_on "mpfr"
+  depends_on "libmpc"
 
   def install
     mktemp do
@@ -17,5 +20,17 @@ class Cbcgcc < Formula
       system "make -j 4"
       system "make", "install"
     end
+  end
+  #   cbcgcc-10.0.1.
+  bottle do
+    rebuild 1
+    root_url "https://cr.ie.u-ryukyu.ac.jp/brew/" # Optional root to calculate bottle URLs
+    sha256 "edc5ec271841a8b8558f8d60ef510c7d7abc91e91cc4fb0422389fad99073857" => :mojave
+  end
+
+  def pour_bottle?
+    # Only needed if this formula has to check if using the pre-built
+    # bottle is fine.
+    true
   end
 end
