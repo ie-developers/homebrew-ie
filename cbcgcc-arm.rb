@@ -22,9 +22,6 @@ class CbcgccArm < Formula
     sha256 "c7c5c824f84c4e114c16e3f2a681dd7eb4544cfaf26cfea1564e3b4ef3110d77" => :catalina
   end
 
-#    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :catalina
-  end
-
   def install
     mktemp do
       arm  =  Utils.popen_read("/usr/local/bin/brew","--prefix","arm-none-eabi-gcc").chomp
