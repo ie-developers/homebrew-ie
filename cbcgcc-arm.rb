@@ -24,15 +24,12 @@ class Cbcgccarm < Formula
 
   def install
     mktemp do
-      # STDERR.puts "testtest"
-      # arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
-      # arm =  Utils.popen_read("/usr/local/bin/brew","--prefix","arm-none-eabi-gcc")
-      # arm =  arm.chomp
-      arm = "/usr/local/opt/arm-none-eabi-gcc"
-      # path = `/usr/bin/find #{arm}/ -name stddef.h -print`
-      # path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
-      # inc =  path[0..-10]
-      inc = "/usr/local/opt/arm-none-eabi-gcc/gcc/lib/gcc/arm-none-eabi/9.2.1/include"
+      arm  =  Utils.popen_read("/usr/local/bin/brew","--prefix","arm-none-eabi-gcc").chomp
+      path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
+      inc  =  path[0..-10]
+      ENV['TARGET'] = "arm-none-eabi"
+      ENV['PREFIX'] = arm+"/gcc"
+      ENV['PATH'] = ENV['PATH'] + ":" + arm + "/gcc/bin"
       system "#{buildpath}/configure",
          "--target=arm-none-eabi",
          "--prefix=#{prefix}",
@@ -47,11 +44,7 @@ class Cbcgccarm < Formula
          "--with-newlib",
          "--with-headers=#{arm}/gcc/arm-none-eabi/include,#{inc}"
       system "sh config.status"
-      system "make","-j","4",
-         "AS_FOR_TARGET=#{arm}/bin/arm-none-eabi-as" ,
-         "AR_FOR_TARGET=#{arm}/bin/arm-none-eabi-ar" ,
-         "RANLIB_FOR_TARGET=#{arm}/bin/arm-none-eabi-ranlib" ,
-         "LD_FOR_TARGET=#{arm}/bin/arm-none-eabi-ld"
+      system "make","-j","4"
       system "make", "install"
     end
   end
