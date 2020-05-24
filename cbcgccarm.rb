@@ -11,10 +11,26 @@ class Cbcgccarm < Formula
   depends_on"gmp"
   depends_on "mpfr"
   depends_on "libmpc"
+  depends_on "arm-none-eabi-gcc"
+  arm = `brew --prefix arm-none-eabi-gcc`.chomp
+  path = `find #{arm}/ -name stddef.h -print`
+  inc =  path[0..-10]
 
   def install
     mktemp do
-      system "#{buildpath}/configure", "--target=arm-elf-eabi", "--prefix=#{prefix}", "--disable-nls" ,  "--disable-bootstrap","--enable-checking=tree,rtl,assert,types","CFLAGS=-g3 -O0", "--enable-languages=c,lto", "--no-create", "--no-recursion", "--disable-multilib" , "--disable-werror"
+      system "#{buildpath}/configure",
+         "--target=arm-elf-eabi",
+         "--prefix=#{prefix}",
+         "--disable-nls" ,
+         "--disable-bootstrap",
+         "--enable-checking=tree,rtl,assert,types",
+         "CFLAGS=-g3 -O0",
+         "--enable-languages=c,lto",
+         "--enable-multilib" ,
+         "--disable-werror",
+         "--disable-libssp", "--disable-libstdcxx-pch", "--disable-libmudflap",
+         "--with-newlib",
+         "--with-headers=#{arm}/gcc/arm-none-eabi/include,#{inc}"
       system "sh config.status"
       system "make -j 4"
       system "make", "install"
