@@ -26,11 +26,13 @@ class Cbcgccarm < Formula
     mktemp do
       # STDERR.puts "testtest"
       # arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
-      arm =  Utils.popen_read("/usr/local/bin/brew","--prefix","arm-none-eabi-gcc")
-      arm =  arm.chomp
+      # arm =  Utils.popen_read("/usr/local/bin/brew","--prefix","arm-none-eabi-gcc")
+      # arm =  arm.chomp
+      arm = "/usr/local/opt/arm-none-eabi-gcc"
       # path = `/usr/bin/find #{arm}/ -name stddef.h -print`
-      path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
-      inc =  path[0..-10]
+      # path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
+      # inc =  path[0..-10]
+      inc = "/usr/local/opt/arm-none-eabi-gcc/gcc/lib/gcc/arm-none-eabi/9.2.1/include"
       system "#{buildpath}/configure",
          "--target=arm-none-eabi",
          "--prefix=#{prefix}",
