@@ -15,10 +15,21 @@ class Cbcgccarm < Formula
   depends_on "libmpc"
   depends_on "arm-none-eabi-gcc"
 
+  bottle do
+    rebuild 1
+    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
+    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :mojave
+#    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :catalina
+  end
+
   def install
     mktemp do
-      arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
-      path = `/usr/bin/find #{arm}/ -name stddef.h -print`
+      STDERR.puts "testtest"
+      # arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
+      arm =  Utils.popen_read("/usr/local/bin/brew","--prefix arm-none-eabi-gcc")
+      arm =  arm.chomp
+      # path = `/usr/bin/find #{arm}/ -name stddef.h -print`
+      path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
       inc =  path[0..-10]
       system "#{buildpath}/configure",
          "--target=arm-none-eabi",
@@ -42,13 +53,6 @@ class Cbcgccarm < Formula
       system "make", "install"
     end
   end
-  bottle do
-    rebuild 1
-    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :mojave
-#    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :catalina
-  end
-
 
   def pour_bottle?
     # Only needed if this formula has to check if using the pre-built
