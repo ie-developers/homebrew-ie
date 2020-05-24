@@ -36,6 +36,7 @@ class Cbcgccarm < Formula
       system "make","-j","4",
          "AS_FOR_TARGET=#{arm}/bin/arm-none-eabi-as" ,
          "AR_FOR_TARGET=#{arm}/bin/arm-none-eabi-ar" ,
+         "RANLIB_FOR_TARGET=#{arm}/bin/arm-none-eabi-ranlib" ,
          "LD_FOR_TARGET=#{arm}/bin/arm-none-eabi-ld"
       system "make", "install"
     end
