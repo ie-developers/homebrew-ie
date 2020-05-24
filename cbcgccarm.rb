@@ -7,6 +7,7 @@ class Cbcgccarm < Formula
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
   version "10.0.1"
 
+
   keg_only "Conflict with various gcc"
   depends_on"gmp"
   depends_on "mpfr"
