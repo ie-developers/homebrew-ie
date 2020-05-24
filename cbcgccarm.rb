@@ -33,8 +33,9 @@ class Cbcgccarm < Formula
          "--with-newlib",
          "--with-headers=#{arm}/gcc/arm-none-eabi/include,#{inc}"
       system "sh config.status"
-      system "make -j 4",
+      system "make","-j","4",
          "AS_FOR_TARGET=#{arm}/bin/arm-none-eabi-as" ,
+         "AR_FOR_TARGET=#{arm}/bin/arm-none-eabi-ar" ,
          "LD_FOR_TARGET=#{arm}/bin/arm-none-eabi-ld"
       system "make", "install"
     end
