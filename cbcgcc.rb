@@ -42,7 +42,7 @@ class Cbcgcc < Formula
     args << "CFLAGS=-g3 -O0"
 
     if MacOS.version >= 10.15 
-      system "#{buildpath}/contrib/download_prerequisites"
+      system "cd #{buildpath};#{buildpath}/contrib/download_prerequisites"
       args << "--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
     end
 
