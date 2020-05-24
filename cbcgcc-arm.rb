@@ -13,6 +13,7 @@ class CbcgccArm < Formula
   depends_on"gmp"
   depends_on "mpfr"
   depends_on "libmpc"
+  depends_on "zstd"
   depends_on "arm-none-eabi-gcc"
 
   bottle do
