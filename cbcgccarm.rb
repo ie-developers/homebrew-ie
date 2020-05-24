@@ -15,9 +15,10 @@ class Cbcgccarm < Formula
   depends_on "arm-none-eabi-gcc"
   print "a"
   arm = `brew --prefix arm-none-eabi-gcc`.chomp
+  print "b"
   path = `find #{arm}/ -name stddef.h -print`
   inc =  path[0..-10]
-  print "b"
+  print "c"
 
   def install
     mktemp do
