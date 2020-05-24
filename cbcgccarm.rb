@@ -26,7 +26,7 @@ class Cbcgccarm < Formula
     mktemp do
       # STDERR.puts "testtest"
       # arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
-      arm =  Utils.popen_read("/usr/local/bin/brew","--prefix arm-none-eabi-gcc")
+      arm =  Utils.popen_read("/usr/local/bin/brew","--prefix","arm-none-eabi-gcc")
       arm =  arm.chomp
       # path = `/usr/bin/find #{arm}/ -name stddef.h -print`
       path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
