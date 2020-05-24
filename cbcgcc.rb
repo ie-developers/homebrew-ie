@@ -15,10 +15,6 @@ class Cbcgcc < Formula
   end
 
   keg_only "Conflict with various gcc"
-  depends_on"gmp"
-  depends_on "mpfr"
-  depends_on "libmpc"
-  depends_on "isl"
 
   def version_suffix
     if build.head?
@@ -41,32 +37,14 @@ class Cbcgcc < Formula
       --no-create
       --no-recursion
       --disable-multilib
-      --with-gmp=#{Formula["gmp"].opt_prefix}
-      --with-mpfr=#{Formula["mpfr"].opt_prefix}
-      --with-mpc=#{Formula["libmpc"].opt_prefix}
-      --with-isl=#{Formula["isl"].opt_prefix}
-
     ]
 
     args << "CFLAGS=-g3 -O0"
 
-    # Xcode 10 dropped 32-bit support
-    args << "--disable-multilib" if DevelopmentTools.clang_build_version >= 1000
-
-    # System headers may not be in /usr/include
-    sdk = MacOS.sdk_path_if_needed
-    if sdk
-      args << "--with-native-system-header-dir=/usr/include"
-      args << "--with-sysroot=#{sdk}"
+    if MacOS.version >= 10.15 
+      system "#{buildpath}/contrib/download_prerequisites"
+      args << "--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
     end
-
-        # Avoid reference to sed shim
-    args << "SED=/usr/bin/sed"
-
-    # Ensure correct install names when linking against libgcc_s;
-    # see discussion in https://github.com/Homebrew/legacy-homebrew/pull/34303
-    inreplace "#{buildpath}/libgcc/config/t-slibgcc-darwin", "@shlib_slibdir@", "#{HOMEBREW_PREFIX}/lib/cbcgcc/#{version_suffix}"
-
 
       system "#{buildpath}/configure", *args
       system "sh config.status"
