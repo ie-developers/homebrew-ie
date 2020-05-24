@@ -20,7 +20,7 @@ class Cbcgccarm < Formula
       path = `/usr/bin/find #{arm}/ -name stddef.h -print`
       inc =  path[0..-10]
       system "#{buildpath}/configure",
-         "--target=arm-elf-eabi",
+         "--target=arm-none-eabi",
          "--prefix=#{prefix}",
          "--disable-nls" ,
          "--disable-bootstrap",
