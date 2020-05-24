@@ -12,6 +12,7 @@ class Cbcgcc < Formula
   depends_on"gmp"
   depends_on "mpfr"
   depends_on "libmpc"
+  depends_on "zstd"
 
   def install
     mktemp do
