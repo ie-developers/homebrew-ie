@@ -13,15 +13,12 @@ class Cbcgccarm < Formula
   depends_on "mpfr"
   depends_on "libmpc"
   depends_on "arm-none-eabi-gcc"
-  print "a"
-  arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
-  print "b"
-  path = `/usr/bin/find #{arm}/ -name stddef.h -print`
-  inc =  path[0..-10]
-  print "c"
 
   def install
     mktemp do
+      arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
+      path = `/usr/bin/find #{arm}/ -name stddef.h -print`
+      inc =  path[0..-10]
       system "#{buildpath}/configure",
          "--target=arm-elf-eabi",
          "--prefix=#{prefix}",
