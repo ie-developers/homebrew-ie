@@ -1,7 +1,7 @@
 # Documentation: https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Formula-Cookbook.md
 #                /usr/local/Library/Contributions/example-formula.rb
 
-class Cbcgccarm < Formula
+class CbcgccArm < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
   url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg, revision: "current"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
