@@ -24,7 +24,7 @@ class Cbcgccarm < Formula
 
   def install
     mktemp do
-      STDERR.puts "testtest"
+      # STDERR.puts "testtest"
       # arm = `/usr/local/bin/brew --prefix arm-none-eabi-gcc`.chomp
       arm =  Utils.popen_read("/usr/local/bin/brew","--prefix arm-none-eabi-gcc")
       arm =  arm.chomp
