@@ -28,17 +28,7 @@ class Cbcgcc < Formula
   def install
     mktemp do
 
-    args = %W[
-      --prefix=#{prefix}
-      --disable-nls
-      --disable-bootstrap
-      --enable-checking=tree,rtl,assert,types
-      CFLAGS="-g3 -O0"
-      --enable-languages=c,lto
-      --no-create
-      --no-recursion
-      --disable-multilib
-    ]
+   args = "--prefix=#{prefix} --disable-nls --disable-bootstrap --enable-checking=tree,rtl,assert,types CFLAGS=\"-g3 -O0\" --enable-languages=c,lto --no-create --no-recursion  --disable-multilib  "
 
 
     if MacOS.version >= 10.15 
