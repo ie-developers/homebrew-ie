@@ -3,7 +3,7 @@
 
 class Cbcgcc < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
-  url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg, revision: "tip"
+  url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
   version "10.0.1"
 
