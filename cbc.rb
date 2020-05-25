@@ -8,6 +8,7 @@ class Cbc < Formula
   version "llvm10"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
   depends_on"cmake"
+  depends_on"ninja"
 
   keg_only "Conflict with original clang"
 
