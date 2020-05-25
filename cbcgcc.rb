@@ -39,7 +39,7 @@ class Cbcgcc < Formula
       --disable-multilib
     ]
 
-    args << "CFLAGS=-g3 -O0"
+    args << 'CFLAGS="-g3 -O0"'
 
     if MacOS.version >= 10.15 
       system "cd #{buildpath};#{buildpath}/contrib/download_prerequisites"
