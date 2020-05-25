@@ -3,7 +3,7 @@
 
 class Cbc < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
-  url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg, revision: "llvm10"
+  url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg # , revision: "llvm10"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
   version "llvm10"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
@@ -14,7 +14,7 @@ class Cbc < Formula
   def install
     mktemp do
       STDERR.puts"before compile\n sudo launchctl stop com.apple.MRTd \n otherwise MRT may run crazy\n\this build may take 18GB"
-      system "cmake -G Ninja -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_INSTALL_PREFIX:PATH=#{prefix} #{buildpath}"
+      system "cmake -G Ninja -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_INSTALL_PREFIX:PATH=#{prefix} #{buildpath}/clang"
       system "ninja"
       system "ninja", "install"
     end
