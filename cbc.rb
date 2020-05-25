@@ -18,7 +18,7 @@ class Cbc < Formula
       ENV['CC'] = llvm + "/bin/clang"
       ENV['CXX'] = llvm + "/bin/clang++"
       ENV['LLVM_DIR'] = buildpath
-      system "cmake","-G","Ninja","-DCMAKE_BUILD_TYPE:STRING=Debug","-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}","-DLLVM_ENABLE_PROJECTS=clang;lld",buildpath,"/llvm"
+      system "cmake","-G","Ninja","-DCMAKE_BUILD_TYPE:STRING=Debug","-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}","-DLLVM_ENABLE_PROJECTS=clang;lld","#{buildpath}/llvm"
       system "ninja"
       system "ninja", "install"
     end
