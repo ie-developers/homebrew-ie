@@ -36,7 +36,7 @@ class Cbcgcc < Formula
       args << "--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
     end
 
-      system "#{buildpath}/configure", *args
+      system "#{buildpath}/configure", args
       system "sh config.status"
       system "make -j 4"
       system "make", "install"
