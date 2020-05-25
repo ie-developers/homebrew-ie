@@ -33,7 +33,8 @@ class Cbcgcc < Formula
 
     if MacOS.version >= 10.15 
       system "cd #{buildpath};#{buildpath}/contrib/download_prerequisites"
-      args << "--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+      sdk_path = `xcrun --sdk macosx --show-sdk-path`
+      args << "--with-sysroot=#{sdk_path}"
     end
 
       system "#{buildpath}/configure #{args}"
