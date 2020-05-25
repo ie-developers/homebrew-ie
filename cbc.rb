@@ -13,12 +13,12 @@ class Cbc < Formula
 
   def install
     mktemp do
-      STDERR.puts"before compile\n sudo launchctl stop com.apple.MRTd \n otherwise MRT may run crazy\n\this build may take 18GB"
+      STDERR.puts"before compile\n sudo launchctl stop com.apple.MRTd \n otherwise MRT may run crazy\nthis build may take 18GB\n"
       llvm  =  Utils.popen_read("/usr/local/bin/brew","--prefix","llvm").chomp
       ENV['CC'] = llvm + "/bin/clang"
       ENV['CXX'] = llvm + "/bin/clang++"
       ENV['LLVM_DIR'] = buildpath
-      system "cmake","-G","Ninja","-DCMAKE_BUILD_TYPE:STRING=Debug","-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}","-DLLVM_ENABLE_PROJECTS=clang;lld",buildpath
+      system "cmake","-G","Ninja","-DCMAKE_BUILD_TYPE:STRING=Debug","-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}","-DLLVM_ENABLE_PROJECTS=clang;lld",buildpath,"/llvm"
       system "ninja"
       system "ninja", "install"
     end
