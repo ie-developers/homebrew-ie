@@ -18,57 +18,10 @@ class Cbcgcc < Formula
   depends_on"gmp"
   depends_on "mpfr"
   depends_on "libmpc"
-  depends_on "isl"
-
-  def version_suffix
-    if build.head?
-      "HEAD"
-    else
-      version.to_s.slice(/\d+/)
-    end
-  end
-
 
   def install
     mktemp do
-
-    args = %W[
-      --prefix=#{prefix}
-      --disable-nls
-      --disable-bootstrap
-      --enable-checking=tree,rtl,assert,types
-      --enable-languages=c,lto
-      --no-create
-      --no-recursion
-      --disable-multilib
-      --with-gmp=#{Formula["gmp"].opt_prefix}
-      --with-mpfr=#{Formula["mpfr"].opt_prefix}
-      --with-mpc=#{Formula["libmpc"].opt_prefix}
-      --with-isl=#{Formula["isl"].opt_prefix}
-
-    ]
-
-    args << "CFLAGS=-g3 -O0"
-
-    # Xcode 10 dropped 32-bit support
-    args << "--disable-multilib" if DevelopmentTools.clang_build_version >= 1000
-
-    # System headers may not be in /usr/include
-    sdk = MacOS.sdk_path_if_needed
-    if sdk
-      args << "--with-native-system-header-dir=/usr/include"
-      args << "--with-sysroot=#{sdk}"
-    end
-
-        # Avoid reference to sed shim
-    args << "SED=/usr/bin/sed"
-
-    # Ensure correct install names when linking against libgcc_s;
-    # see discussion in https://github.com/Homebrew/legacy-homebrew/pull/34303
-    inreplace "#{buildpath}/libgcc/config/t-slibgcc-darwin", "@shlib_slibdir@", "#{HOMEBREW_PREFIX}/lib/cbcgcc/#{version_suffix}"
-
-
-      system "#{buildpath}/configure", *args
+      system "#{buildpath}/configure", "--prefix=#{prefix}", "--disable-nls" ,  "--disable-bootstrap","--enable-checking=tree,rtl,assert,types","CFLAGS=-g3 -O0", "--enable-languages=c,lto", "--no-create", "--no-recursion", "--disable-multilib"
       system "sh config.status"
       system "make -j 4"
       system "make", "install"
