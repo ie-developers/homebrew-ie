@@ -36,10 +36,14 @@ class Cbcgcc < Formula
       args = "--prefix=#{prefix} --disable-nls --disable-bootstrap --enable-checking=tree,rtl,assert,types "
         + "CFLAGS=\"-g3 -O0\" --enable-languages=c,lto --no-create --no-recursion --disable-multilib "
 
+      args << "--disable-multilib " if DevelopmentTools.clang_build_version >= 1000
+      args << "SED=/usr/bin/sed " 
+      args << "--with-system-zlib "
+
       if MacOS.version >= 10.15 
         system "cd #{buildpath};#{buildpath}/contrib/download_prerequisites"
         sdk_path = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
-        args << "--with-sysroot=#{sdk_path}"
+        args << "--with-sysroot=#{sdk_path} "
       end
       system "#{buildpath}/configure #{args}"
       system "./config.status"
