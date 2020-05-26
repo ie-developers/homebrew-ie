@@ -34,7 +34,7 @@ class Cbcgcc < Formula
         + "CFLAGS=\"-g3 -O0\" --enable-languages=c,lto --no-create --no-recursion --disable-multilib "
 
       if MacOS.version >= 10.15 
-        # system "cd #{buildpath};#{buildpath}/contrib/download_prerequisites"
+        system "cd #{buildpath};#{buildpath}/contrib/download_prerequisites"
         sdk_path = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
         args << "--with-sysroot=#{sdk_path}"
       end
