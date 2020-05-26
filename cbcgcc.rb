@@ -41,6 +41,7 @@ class Cbcgcc < Formula
       args << "--with-system-zlib "
 
       if MacOS.version >= 10.15 
+        args << "--disable-libstdcxx "
         system "cd #{buildpath};#{buildpath}/contrib/download_prerequisites"
         sdk_path = `xcrun --sdk macosx --show-sdk-path`
         #sdk_path = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
