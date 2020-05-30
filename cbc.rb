@@ -29,10 +29,11 @@ class Cbc < Formula
   end
 
   bottle do
-    rebuild 1
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :mojave
-    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :catalina
+    cellar :any_skip_relocation
+    rebuild 2
+    sha256 "b639cab08051c958afd6ae17ce058884ae9c6271d31d63b21154fef4b5463ba3" => :mojave
+    sha256 "b639cab08051c958afd6ae17ce058884ae9c6271d31d63b21154fef4b5463ba3" => :catalina
   end
 
 end
