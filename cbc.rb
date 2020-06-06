@@ -15,11 +15,13 @@ class Cbc < Formula
   def install
     mktemp do
       STDERR.puts"before compile\n sudo launchctl stop com.apple.MRTd \n otherwise MRT may run crazy\nthis build may take 18GB\n"
+      if MacOS.version >= 10.15
       llvm  =  Utils.popen_read("/usr/local/bin/brew","--prefix","llvm").chomp
-      ENV['CC'] = llvm + "/bin/clang"
-      ENV['CXX'] = llvm + "/bin/clang++"
-      ENV['LLVM_DIR'] = buildpath
-      ENV['PATH'] = ENV['PATH'] + ":/usr/local/bin"
+         ENV['CC'] = llvm + "/bin/clang"
+         ENV['CXX'] = llvm + "/bin/clang++"
+         ENV['LLVM_DIR'] = buildpath
+         ENV['PATH'] = ENV['PATH'] + ":/usr/local/bin"
+      end 
       system "cmake","-G","Ninja","-DCMAKE_BUILD_TYPE:STRING=Debug","-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}","-DLLVM_ENABLE_PROJECTS=clang;lld","#{buildpath}/llvm"
       system "ninja"
       system "ninja", "install"
@@ -27,10 +29,11 @@ class Cbc < Formula
   end
 
   bottle do
-    rebuild 1
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :mojave
-    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :catalina
+    rebuild 3
+    root_url "https://homebrew.bintray.com/bottles-ie"
+    cellar :any
+    sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :mojave
+    sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :catalina
   end
-
 end
