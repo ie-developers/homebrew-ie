@@ -30,10 +30,10 @@ class Cbc < Formula
 
   bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    cellar :any_skip_relocation
-    rebuild 2
-    sha256 "b639cab08051c958afd6ae17ce058884ae9c6271d31d63b21154fef4b5463ba3" => :mojave
-    sha256 "b639cab08051c958afd6ae17ce058884ae9c6271d31d63b21154fef4b5463ba3" => :catalina
+    rebuild 3
+    root_url "https://homebrew.bintray.com/bottles-ie"
+    cellar :any
+    sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :mojave
+    sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :catalina
   end
-
 end
