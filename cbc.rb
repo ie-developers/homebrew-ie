@@ -43,5 +43,10 @@ class Cbc < Formula
     sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :mojave
     sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :catalina
   end
+  def pour_bottle?
+    # Only needed if this formula has to check if using the pre-built
+    # bottle is fine.
+    true
+  end
 
 end
