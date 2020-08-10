@@ -5,7 +5,7 @@ class Cbc < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
   url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg # , revision: "llvm10"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
-  version "llvm10-1"
+  version "llvm10"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
   depends_on"cmake"
   depends_on"ninja"
@@ -36,4 +36,14 @@ class Cbc < Formula
     sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :mojave
     sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :catalina
   end
+
+  bottle do
+    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
+    rebuild 4
+    root_url "https://homebrew.bintray.com/bottles-ie"
+    cellar :any
+    sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :mojave
+    sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :catalina
+  end
+
 end
