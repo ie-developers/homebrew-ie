@@ -31,7 +31,6 @@ class Cbc < Formula
   bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
     rebuild 3
-    root_url "https://homebrew.bintray.com/bottles-ie"
     cellar :any
     sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :mojave
     sha256 "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f" => :catalina
@@ -40,7 +39,6 @@ class Cbc < Formula
   bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
     rebuild 4
-    root_url "https://homebrew.bintray.com/bottles-ie"
     cellar :any
     sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :mojave
     sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :catalina
