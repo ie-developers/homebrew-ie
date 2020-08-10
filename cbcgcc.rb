@@ -7,12 +7,6 @@ class Cbcgcc < Formula
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
   version "10.0.1"
 
-  bottle do 
-    rebuild 1
-    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    sha256 "cd7ea217a174e440cfd7bf6e1367ceca7daae8f6ca9805056dd117e6cbc3ce97" => :mojave
-    sha256 "9465b16d6e5443290600bf9bb11c8d2c46f1d3992bcd5d56f85bd2c698e2e6eb" => :catalina
-  end
 
   keg_only "Conflict with various gcc"
   depends_on "gmp"
