@@ -1,7 +1,7 @@
 # Documentation: https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Formula-Cookbook.md
 #                /usr/local/Library/Contributions/example-formula.rb
 
-class Cbc < Formula
+class Cbclang < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
   url  "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg # , revision: "llvm10"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
