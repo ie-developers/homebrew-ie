@@ -43,6 +43,14 @@ class Cbclang < Formula
     sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :mojave
     sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :catalina
   end
+
+  bottle do
+    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
+    rebuild 1
+    cellar :any
+    sha256 "6f3d05bc49bd9c92177dfa8253a56180a27c6ec28279760cad1b380b795b363a" => :mojave
+  end
+
   def pour_bottle?
     # Only needed if this formula has to check if using the pre-built
     # bottle is fine.
