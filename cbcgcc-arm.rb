@@ -38,7 +38,7 @@ class CbcgccArm < Formula
          "--disable-bootstrap",
          "--enable-checking=tree,rtl,assert,types",
          "--no-create","--no-recursion",
-         "--with-arch=armv7-a","--with-fpu=vfp", "--with-float=hard"
+         "--with-arch=armv7-a","--with-fpu=vfp", "--with-float=hard",
          "CFLAGS=-g3 -O0",
          "--enable-languages=c,lto",
          "--disable-multilib" ,
