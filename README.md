@@ -9,7 +9,7 @@ It contains formulae of software which hosted by ie-ryukyu and cached formulae t
 - `` $ brew install formula_name``
 
 ## Example
-- `` $ brew install cbc ``
+- `` $ brew install cbclang ``
 - `` $ brew install treevnc``
 
 ## Usage : Install cashed formulas for PC-Setup. (only works internal network)
