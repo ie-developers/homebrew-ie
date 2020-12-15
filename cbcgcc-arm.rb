@@ -26,8 +26,8 @@ class CbcgccArm < Formula
   def install
     mktemp do
       arm  =  Utils.popen_read("/usr/local/bin/brew","--prefix","arm-none-eabi-gcc").chomp
-      path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
-      inc  =  path[0..-10]
+      #path =  Utils.popen_read("/usr/bin/find","#{arm}/","-name","stddef.h","-print`")
+      #inc  =  path[0..-10]
       ENV['TARGET'] = "arm-none-eabi"
       ENV['PREFIX'] = arm+"/gcc"
       ENV['PATH'] = ENV['PATH'] + ":" + arm + "/gcc/bin"
@@ -37,16 +37,21 @@ class CbcgccArm < Formula
          "--disable-nls" ,
          "--disable-bootstrap",
          "--enable-checking=tree,rtl,assert,types",
+         "--no-create","--no-recursion",
+         "--with-arch=armv7-a","--with-fpu=vfp", "--with-float=hard"
          "CFLAGS=-g3 -O0",
          "--enable-languages=c,lto",
          "--disable-multilib" ,
          "--disable-werror",
          "--disable-libssp", "--disable-libstdcxx-pch", "--disable-libmudflap",
          "--with-newlib",
-         "--with-headers=#{arm}/gcc/arm-none-eabi/include,#{inc}"
+         "--enable-interwork",
+         "--with-as=#{arm}/bin/arm-none-eabi-as","--with-ld=#{arm}/bin/arm-none-eabi-ld",
+         "--with-headers=yes"
+         # "--with-headers=#{arm}/gcc/arm-none-eabi/include,#{inc}"
       system "sh config.status"
-      system "make","-j","4"
-      system "make", "install"
+      system "make","-k","-j","20"      # for firefly
+      system "make","-k","install"
     end
   end
 
