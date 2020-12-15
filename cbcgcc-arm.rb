@@ -50,8 +50,8 @@ class CbcgccArm < Formula
          "--with-headers=yes"
          # "--with-headers=#{arm}/gcc/arm-none-eabi/include,#{inc}"
       system "sh config.status"
-      system "make","-k","-j","20"      # for firefly
-      system "make","-k","install"
+      system "make","-k","-j","20","||","true"      # for firefly
+      system "make","-k","install","||","true"
     end
   end
 
