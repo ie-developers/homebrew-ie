@@ -14,6 +14,7 @@ class CbcgccArm < Formula
   depends_on "mpfr"
   depends_on "libmpc"
   depends_on "zstd"
+  # use build from source as `brew install -s cesarvandevelde/formulae/arm-none-eabi-gcc` in Catalina
   depends_on "cesarvandevelde/formulae/arm-none-eabi-gcc" # "ARMmbed/formulae/arm-none-eabi-gcc"
 
   bottle do
@@ -21,6 +22,12 @@ class CbcgccArm < Formula
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
     sha256 "c7c5c824f84c4e114c16e3f2a681dd7eb4544cfaf26cfea1564e3b4ef3110d77" => :mojave
     sha256 "c7c5c824f84c4e114c16e3f2a681dd7eb4544cfaf26cfea1564e3b4ef3110d77" => :catalina
+  end
+
+  bottle do
+    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
+    rebuild 2
+    sha256 "4194fc03868dd0e88a79a04f82d7cc92ae5f115533b67104b80935146e6094f2" => :mojave
   end
 
   def install
