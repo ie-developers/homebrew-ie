@@ -1,3 +1,6 @@
+# typed: false
+# frozen_string_literal: true
+
 # this version based f517bd74c37063c654cf1e6fbcbd689932f7cf9e
 class Gnuplot < Formula
   desc "Command-driven, interactive function plotting"
@@ -6,10 +9,10 @@ class Gnuplot < Formula
   sha256 "35dd8f013139e31b3028fac280ee12d4b1346d9bb5c501586d1b5a04ae7a94ee"
 
   bottle do
-    sha256 "de4c1ae7e84496672a59e46e57bbb52de0c30e52e5fc057b41e7d6a6f0a754e8" => :mojave
-    sha256 "83e62efd791e58c6be41b8da6975e66bf88ee01c2d364dc56f4496a2ec2c20aa" => :high_sierra
-    sha256 "bdd5bf26cfe0c268092d6120f1aaa57cf9f7c99464c83de1b64ac3d7c24f1741" => :sierra
-    sha256 "b0d21667f51ef06d824a1b68ed41d32d85848e8da4b9ac8fa9fdf09c31f7f05b" => :el_capitan
+    sha256 mojave:      "de4c1ae7e84496672a59e46e57bbb52de0c30e52e5fc057b41e7d6a6f0a754e8"
+    sha256 high_sierra: "83e62efd791e58c6be41b8da6975e66bf88ee01c2d364dc56f4496a2ec2c20aa"
+    sha256 sierra:      "bdd5bf26cfe0c268092d6120f1aaa57cf9f7c99464c83de1b64ac3d7c24f1741"
+    sha256 el_capitan:  "b0d21667f51ef06d824a1b68ed41d32d85848e8da4b9ac8fa9fdf09c31f7f05b"
   end
 
   head do
@@ -39,7 +42,7 @@ class Gnuplot < Formula
   depends_on "qt" => :optional
   depends_on "wxmac" => :optional
   depends_on "pango" if build.with?("cairo") || build.with?("wxmac")
-  depends_on :x11 => :optional
+  depends_on x11: :optional
 
   needs :cxx11 if build.with? "qt"
 
@@ -81,10 +84,10 @@ class Gnuplot < Formula
       args << "--without-cairo" if build.without? "cairo"
     end
 
-    if build.with? "qt"
-      args << "--with-qt"
+    args << if build.with? "qt"
+      "--with-qt"
     else
-      args << "--with-qt=no"
+      "--with-qt=no"
     end
 
     args << "--without-lua" if build.without? "lua"
