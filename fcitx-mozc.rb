@@ -14,26 +14,23 @@ class FcitxMozc < Formula
 
   # depends_on "cmake" => :build
   depends_on "ninja" => :build
-  depends_on "qt@5" => :build
+  # depends_on "qt@5" => :build
 
   def install
-    # ENV.deparallelize  # if your formula fails when building in parallel
-    # Remove unrecognized options if warned by configure
-    # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
-    # require 'shell'
-    # sh = Shell.new
-    # p sh.cwd
-    # system "ls","-l"
-    # system "autoreconf", "--install"
+    # we need Packages to build this
+    # http://s.sudre.free.fr/Software/Packages/about.html
+    #
     ENV["GYP_DEFINES"] = "mac_sdk= mac_deployment_target=11.3"
-    cd "src" do
-      # system "python3", "build_mozc.py", "gyp", "--noqt"
-      # system "python3", "build_mozc.py","build","-c","Release","mac/mac.gyp:GoogleJapaneseInput"
-      system "python3", "build_mozc.py", "gyp", "--qtdir", Formula["qt@5"].opt_prefix.to_s
-      system "python3", "build_mozc.py", "build", "-c", "Release", "gui/gui.gyp:config_dialog_main"
-      system "python3", "build_mozc.py", "build", "-c", "Release", ":Installer"
-      # install package is created execute by the user
-      system "cp","out_mac/Release/Mozc.pkg",#{prefix}
+    cd "src"  do
+       system "python3", "build_mozc.py", "gyp", "--noqt"
+       system "python3","build_mozc.py","build","-c","Release","mac/mac.gyp:GoogleJapaneseInput"
+       # system "python3", "build_mozc.py", "gyp", "--qtdir", Formula["qt@5"].opt_prefix.to_s
+       # system "python3", "build_mozc.py", "build", "-c", "Release", "gui/gui.gyp:config_dialog_main"
+       # system "echo python3 build_mozc.py build -c Release gui/gui.gyp:config_dialog_main \\; exit 0 > do.sh";
+       # system "sh do.sh"
+       system "python3", "build_mozc.py", "build", "-c", "Release", ":Installer"
+       # install package is created execute by the user
+       system "cp","out_mac/Release/Mozc.pkg","#{prefix}"
     end
   end
 

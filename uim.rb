@@ -9,7 +9,10 @@ class Uim < Formula
   homepage ""
   url "https://github.com/uim/uim.git"
   version "1.7"
-  sha256 "582dfb8e99be98641f2fec3b9b08a4587e676e8306c0be00db478080320ff800"
+  bottle do
+    root_url "https://ie.u-ryukyu.sc.jp/brew/uim"
+    sha256 big_sur: "b156bc11204b33358b582304860c857ef0d35ffa6f40a41a3f4bd9e9a1a77c86"
+  end
   license ""
 
   # depends_on "cmake" => :build
@@ -17,6 +20,7 @@ class Uim < Formula
   depends_on "automake"   => :build
   depends_on "libtool"    => :build
   depends_on "pkg-config" => :build
+  depends_on "anthy"
   depends_on "gettext"
   depends_on "intltool"
 
@@ -34,10 +38,9 @@ class Uim < Formula
     system "sed", "-i", "orig", "-e", "s/BROKEN_SNPRINTF/BROKEN_SNPRINTF1/", "replace/bsd-snprintf.c",
            "replace/os_dep.h"
     system "/usr/bin/make", "-j1"
-    # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    # system "false"
     system "(echo /usr/bin/make -j1 install ; echo exit 0 )> do.sh"
     system "sh", "do.sh"
-    # system "false"
   end
 
   test do
