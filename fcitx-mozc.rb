@@ -9,8 +9,10 @@ class FcitxMozc < Formula
   homepage ""
   url "https://github.com/fcitx/mozc.git"
   version "2.3"
-  # sha256 "582dfb8e99be98641f2fec3b9b08a4587e676e8306c0be00db478080320ff800"
   license ""
+  bottle do
+    sha256 cellar: :any_skip_relocation, big_sur: "ffe95bd0af017b7ba5acf5d39ec9cde8d2e66059dfc8b8a7d95bb449de7a5364"
+  end
 
   # depends_on "cmake" => :build
   depends_on "ninja" => :build
@@ -30,7 +32,8 @@ class FcitxMozc < Formula
        # system "sh do.sh"
        system "python3", "build_mozc.py", "build", "-c", "Release", ":Installer"
        # install package is created execute by the user
-       system "cp","out_mac/Release/Mozc.pkg","#{prefix}"
+       # system "cp","out_mac/Release/Mozc.pkg","#{prefix}"
+       prefix.install "out_mac/Release/Mozc.pkg"
     end
   end
 
