@@ -11,7 +11,7 @@ class FcitxMozc < Formula
   version "2.3"
   license ""
   bottle do
-    root_url "https://ie.u-ryukyu.sc.jp/brew/fcitx-mozc"
+    root_url "https://ie.u-ryukyu.ac.jp/brew/fcitx-mozc"
     sha256 cellar: :any_skip_relocation, big_sur: "ffe95bd0af017b7ba5acf5d39ec9cde8d2e66059dfc8b8a7d95bb449de7a5364"
   end
 
