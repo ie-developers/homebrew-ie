@@ -24,17 +24,17 @@ class FcitxMozc < Formula
     # http://s.sudre.free.fr/Software/Packages/about.html
     #
     ENV["GYP_DEFINES"] = "mac_sdk= mac_deployment_target=11.3"
-    cd "src"  do
-       system "python3", "build_mozc.py", "gyp", "--noqt"
-       system "python3","build_mozc.py","build","-c","Release","mac/mac.gyp:GoogleJapaneseInput"
-       # system "python3", "build_mozc.py", "gyp", "--qtdir", Formula["qt@5"].opt_prefix.to_s
-       # system "python3", "build_mozc.py", "build", "-c", "Release", "gui/gui.gyp:config_dialog_main"
-       # system "echo python3 build_mozc.py build -c Release gui/gui.gyp:config_dialog_main \\; exit 0 > do.sh";
-       # system "sh do.sh"
-       system "python3", "build_mozc.py", "build", "-c", "Release", ":Installer"
-       # install package is created execute by the user
-       # system "cp","out_mac/Release/Mozc.pkg","#{prefix}"
-       prefix.install "out_mac/Release/Mozc.pkg"
+    cd "src" do
+      system "python3", "build_mozc.py", "gyp", "--noqt"
+      system "python3", "build_mozc.py", "build", "-c", "Release", "mac/mac.gyp:GoogleJapaneseInput"
+      # system "python3", "build_mozc.py", "gyp", "--qtdir", Formula["qt@5"].opt_prefix.to_s
+      # system "python3", "build_mozc.py", "build", "-c", "Release", "gui/gui.gyp:config_dialog_main"
+      # system "echo python3 build_mozc.py build -c Release gui/gui.gyp:config_dialog_main \\; exit 0 > do.sh";
+      # system "sh do.sh"
+      system "python3", "build_mozc.py", "build", "-c", "Release", ":Installer"
+      # install package is created execute by the user
+      # system "cp","out_mac/Release/Mozc.pkg","#{prefix}"
+      prefix.install "out_mac/Release/Mozc.pkg"
     end
   end
 

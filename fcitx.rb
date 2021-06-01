@@ -14,39 +14,39 @@ class Fcitx < Formula
   depends_on "cmake" => :build
   depends_on "extra-cmake-modules" => :build
   depends_on "ninja" => :build
-  depends_on "libxkbcommon" 
-  depends_on "iso-codes" 
-  depends_on "libxkbfile" 
-  depends_on "json-c" 
-  depends_on "cairo" 
+  depends_on "cairo"
+  depends_on "iso-codes"
+  depends_on "json-c"
+  depends_on "libxkbcommon"
+  depends_on "libxkbfile"
 
   def install
-       patch = <<HEREDOC
-*** src/lib/fcitx-utils/utils.c 2021-05-02 00:49:04.000000000 +0900
---- src/lib/fcitx-utils/utils.c.orig    2021-05-02 00:45:47.000000000 +0900
-***************
-*** 65,74 ****
-
-  #if defined(__linux__) || defined(__GLIBC__)
-  #include <endian.h>
-- #else
-- #if defined(__APPLE__)
-- #include <sys/_endian.h>
-  #else
-  #include <sys/endian.h>
-  #endif
-- #endif
-
---- 65,70 ----
-HEREDOC
-     File.open("fix.patch", 'w') { |file| file.write(patch) ; file.close()}
-     # patch does not work
-     system "sed -i orig -e s-sys/endian.h-machine/endian.h-  src/lib/fcitx-utils/utils.c"
-     mktemp do
-
-        system "cmake", "-G","Ninja", "-DENABLE_OPENCC=OFF", "-DFORCE_OPENCC=OFF","-DENABLE_GIR=OFF" ,"-DENABLE_CAIRO=OFF" ,"-DENABLE_QT=OFF" ,"-DENABLE_QT_IM_MODULE=OFF" , "-DENABLE_GTK2_IM_MODULE=OFF" , "-DENABLE_GTK3_IM_MODULE=OFF" , "-DENABLE_SNOOPER=OFF","-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}","#{buildpath}" 
-        system "ninja","-k"
-        system "ninja install"
+    patch = <<~HEREDOC
+            *** src/lib/fcitx-utils/utils.c 2021-05-02 00:49:04.000000000 +0900
+            --- src/lib/fcitx-utils/utils.c.orig    2021-05-02 00:45:47.000000000 +0900
+            ***************
+            *** 65,74 ****
+      #{"      "}
+              #if defined(__linux__) || defined(__GLIBC__)
+              #include <endian.h>
+            - #else
+            - #if defined(__APPLE__)
+            - #include <sys/_endian.h>
+              #else
+              #include <sys/endian.h>
+              #endif
+            - #endif
+      #{"      "}
+            --- 65,70 ----
+    HEREDOC
+    File.open("fix.patch", "w") { |file| file.write(patch); file.close }
+    # patch does not work
+    system "sed", "-i", "orig", "-e", "s-sys/endian.h-machine/endian.h-", "src/lib/fcitx-utils/utils.c"
+    mktemp do
+      system "cmake", "-G", "Ninja", "-DENABLE_OPENCC=OFF", "-DFORCE_OPENCC=OFF", "-DENABLE_GIR=OFF",
+             "-DENABLE_CAIRO=OFF", "-DENABLE_QT=OFF", "-DENABLE_QT_IM_MODULE=OFF", "-DENABLE_GTK2_IM_MODULE=OFF", "-DENABLE_GTK3_IM_MODULE=OFF", "-DENABLE_SNOOPER=OFF", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}", buildpath.to_s
+      system "ninja", "-k"
+      system "ninja", "install"
     end
   end
 

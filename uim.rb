@@ -9,11 +9,11 @@ class Uim < Formula
   homepage ""
   url "https://github.com/uim/uim.git"
   version "1.7"
+  license ""
   bottle do
     root_url "https://ie.u-ryukyu.sc.jp/brew/uim"
     sha256 big_sur: "b156bc11204b33358b582304860c857ef0d35ffa6f40a41a3f4bd9e9a1a77c86"
   end
-  license ""
 
   # depends_on "cmake" => :build
   depends_on "autoconf"   => :build

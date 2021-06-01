@@ -10,33 +10,13 @@ class Cbclang < Formula
   version "llvm10"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
-  bottle do
-    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    rebuild 3
-    sha256 cellar: :any, mojave:   "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f"
-    sha256 cellar: :any, catalina: "ce87e33bcb2a285d366f2854fb28349a5df3426f4eb8701a23c4c4749316f74f"
-  end
 
   bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
     rebuild 4
     cellar :any
-    sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :mojave
-    sha256 "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" => :catalina
-  end
-
-  bottle do
-    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    rebuild 1
-    cellar :any
-    sha256 "6f3d05bc49bd9c92177dfa8253a56180a27c6ec28279760cad1b380b795b363a" => :mojave
-  end
-
-  bottle do
-    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    cellar :any
-    rebuild 2
-    sha256 "3aae7391ff6099099aa20b357e03ddafa179fef18f35f03fedd49ecf87fb6124" => :catalina
+    sha256 cellar: :any, mojave: "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" 
+    sha256 cellar: :any, catalina:"3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" 
   end
 
   keg_only "conflict with original clang"
