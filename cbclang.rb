@@ -13,7 +13,6 @@ class Cbclang < Formula
 
   bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    rebuild 4
     cellar :any
     sha256 cellar: :any, mojave: "3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" 
     sha256 cellar: :any, catalina:"3839aab15f6d12495199fe380022b4374785a5d62262efbdeda3c4311164d696" 
