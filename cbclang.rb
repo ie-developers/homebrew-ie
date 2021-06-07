@@ -33,7 +33,12 @@ class Cbclang < Formula
         ENV["LLVM_DIR"] = buildpath
         ENV["PATH"] = "#{ENV["PATH"]}:/usr/local/bin"
       end
-      system "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE:STRING=Debug", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
+      if MacOS.version >= 11.0
+        ENV["SDKROOT"]=Utils.safe_popen_read( "/usr/bin/xcrun","--sdk","macosx","--show-sdk-path").chomp
+      end
+      # system "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE:STRING=Debug", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
+      #        "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm"
+      system "cmake", "-G", "Ninja", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
              "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm"
       system "ninja"
       system "ninja", "install"
