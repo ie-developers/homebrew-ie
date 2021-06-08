@@ -6,7 +6,7 @@
 
 class Cbclang < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
-  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", tag; "before-12", using: :hg # , revision: "llvm10"
+  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", tag: "before-12", using: :hg # , revision: "llvm10"
   version "llvm10"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
