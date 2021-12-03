@@ -33,10 +33,11 @@ class Uim < Formula
     # p sh.cwd
     # system "ls","-l"
     # system "autoreconf", "--install"
-    ENV["PKG_CONFIG_PATH"] = "/opt/X11/lib/pkgconfig"
+    ENV["PKG_CONFIG_PATH"] = "/opt/X11/lib/pkgconfig:/opt/X11/share/pkgconfig"
     system "./make-wc.sh", *std_configure_args, "--disable-silent-rules"
     system "sed", "-i", "orig", "-e", "s/BROKEN_SNPRINTF/BROKEN_SNPRINTF1/", "replace/bsd-snprintf.c",
            "replace/os_dep.h"
+    system "sed", "-i", "orig", "-e", "/#if defined(DARWIN)/,/^#endif/s/defined(X86_64)/defined(X86_64) || defined(AARCH64)/", "sigscheme/libgcroots/include/private/gc_priv.h"
     system "/usr/bin/make", "-j1"
     # system "false"
     system "(echo /usr/bin/make -j1 install ; echo exit 0 )> do.sh"
