@@ -12,7 +12,7 @@ class Anthy < Formula
   license ""
   bottle do
     root_url "https://ie.u-ryukyu.sc.jp/brew/anthy"
-    sha256 "0cd820bb7284e6907b668bb48f0767052394315a39a6594f8d39c6ec19e04a37" => :big_sur
+    sha256 cellar: :any_skip_relocation, big_sur: "0cd820bb7284e6907b668bb48f0767052394315a39a6594f8d39c6ec19e04a37" 
   end
 
   # depends_on "cmake" => :build

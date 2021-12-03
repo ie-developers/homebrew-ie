@@ -14,8 +14,8 @@ class CbcgccArm < Formula
   bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
     rebuild 2
-    sha256 "4194fc03868dd0e88a79a04f82d7cc92ae5f115533b67104b80935146e6094f2" => :mojave
-    sha256 "2fd3e98cf6479b7dd29258345b29a0d288b9b37704bacf5af3049450b54f1a56" => :catalina
+    sha256 cellar: :any_skip_relocation, mojave: "4194fc03868dd0e88a79a04f82d7cc92ae5f115533b67104b80935146e6094f2" 
+    sha256 cellar: :any_skip_relocation, catalina: "2fd3e98cf6479b7dd29258345b29a0d288b9b37704bacf5af3049450b54f1a56" 
   end
 
   keg_only "conflict with various gcc"
