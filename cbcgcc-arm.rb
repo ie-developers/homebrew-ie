@@ -12,13 +12,6 @@ class CbcgccArm < Formula
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_gcc", using: :hg
 
   bottle do
-    rebuild 1
-    root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
-    sha256 mojave:   "c7c5c824f84c4e114c16e3f2a681dd7eb4544cfaf26cfea1564e3b4ef3110d77"
-    sha256 catalina: "c7c5c824f84c4e114c16e3f2a681dd7eb4544cfaf26cfea1564e3b4ef3110d77"
-  end
-
-  bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
     rebuild 2
     sha256 "4194fc03868dd0e88a79a04f82d7cc92ae5f115533b67104b80935146e6094f2" => :mojave

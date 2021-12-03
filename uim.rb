@@ -12,7 +12,7 @@ class Uim < Formula
   license ""
   bottle do
     root_url "https://ie.u-ryukyu.sc.jp/brew/uim"
-    sha256 big_sur: "b156bc11204b33358b582304860c857ef0d35ffa6f40a41a3f4bd9e9a1a77c86"
+    sha256 "b156bc11204b33358b582304860c857ef0d35ffa6f40a41a3f4bd9e9a1a77c86" => :big_sur
   end
 
   # depends_on "cmake" => :build

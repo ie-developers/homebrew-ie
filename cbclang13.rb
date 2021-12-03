@@ -15,8 +15,8 @@ class Cbclang13 < Formula
   bottle do
     root_url "http://www.cr.ie.u-ryukyu.ac.jp/brew" # Optional root to calculate bottle URLs
     rebuild 3
-    sha256 arm64_big_sur: "1e7ab91d73efe72eed8681fb21046f90b3323bbe29f78eceb751bca587c86303"
-    sha256 catalina: "8a9bc3205653f8bdd5a977f70ecd034683f12f253b1b8e7a8b316050b72eec9f"
+    sha256 "1e7ab91d73efe72eed8681fb21046f90b3323bbe29f78eceb751bca587c86303" => :arm64_big_sur
+    sha256 "8a9bc3205653f8bdd5a977f70ecd034683f12f253b1b8e7a8b316050b72eec9f" => :catalina
   end
 
   keg_only "conflict with original clang"
