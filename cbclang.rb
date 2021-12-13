@@ -18,6 +18,7 @@ class Cbclang < Formula
     sha256 cellar: :any_skip_relocation, big_sur: "2ba57ee76a34d34db3424a2385a9ce3c49db1a17abada8fe533d8f618ea4b26d" 
     sha256 cellar: :any_skip_relocation, mojave: "849051152676d540389fbe4029f430dc194bce4035936f6724761b2d7a0c1a70" 
     sha256 cellar: :any_skip_relocation, arm64_big_sur: "934140268cd63de051b90f371a88ca6a9d4d44c32767b8278950abb3e5ea55d4" 
+    sha256 cellar: :any_skip_relocation, arm64_monterey: "9c962b229614a2b9975d228913b75c7310cb0206438c8273a0baa39a0e6885d7"
   end
 
   keg_only "conflict with original clang"
