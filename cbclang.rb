@@ -32,7 +32,8 @@ class Cbclang < Formula
   def install
     mktemp do
       $stderr.puts "before compile\n sudo launchctl stop com.apple.MRTd \n otherwise MRT may run crazy\nthis build may take 18GB\n"
-      if MacOS.version >=  :catalina
+      #  CPU.intel is a workaround for bad llvm in intel mac
+      if MacOS.version >= :catalina && !Hardware::CPU.intel?
         # llvm = Utils.safe_popen_read("brew", "--prefix", "llvm").chomp
         llvm = Formula["llvm"].prefix
         ENV["CC"] = "#{llvm}/bin/clang"
