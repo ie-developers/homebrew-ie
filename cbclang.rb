@@ -6,8 +6,8 @@
 
 class Cbclang < Formula
   homepage "http://www.cr.ie.u-ryukyu.ac.jp"
-  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", tag: "before-12", using: :hg # , revision: "llvm10"
-  version "llvm10"
+  url "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", tag: "current", using: :hg # , revision: "llvm10"
+  version "llvm18"
   sha256 "b55dd4426265c52c517f79b2c79d0e556168c14c6ed5e79b51b6cf2f52f43e2a"
   head "http://www.cr.ie.u-ryukyu.ac.jp/hg/CbC/CbC_llvm", using: :hg
 
@@ -31,7 +31,7 @@ class Cbclang < Formula
   def install
     mktemp do
       $stderr.puts "before compile\n sudo launchctl stop com.apple.MRTd \n otherwise MRT may run crazy\nthis build may take 18GB\n"
-      if MacOS.version >= 10.15
+      if MacOS.version >=  :catalina
         # llvm = Utils.safe_popen_read("brew", "--prefix", "llvm").chomp
         llvm = Formula["llvm"].prefix
         ENV["CC"] = "#{llvm}/bin/clang"
@@ -39,13 +39,13 @@ class Cbclang < Formula
         ENV["LLVM_DIR"] = buildpath
         ENV["PATH"] = "#{ENV["PATH"]}:/usr/local/bin"
       end
-      # if MacOS.version >= 11.0
-      #   ENV["SDKROOT"]=Utils.safe_popen_read( "/usr/bin/xcrun","--sdk","macosx","--show-sdk-path").chomp
-      # end
-      # system "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE:STRING=Debug", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
-      #        "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm"
-      system "cmake", "-G", "Ninja", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
-             "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm"
+      system "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
+             "-DLLVM_INCLUDE_TESTS=OFF", "-DLLVM_INCLUDE_EXAMPLES=OFF", "-DLLVM_INCLUDE_DOCS=OFF",
+             "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm/"
+      puts "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
+             "-DLLVM_INCLUDE_TESTS=OFF", "-DLLVM_INCLUDE_EXAMPLES=OFF", "-DLLVM_INCLUDE_DOCS=OFF",
+             "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm/"
+      ## puts "pwd = ",Dir.pwd,ENV["CXX"]  ( build dire is wrong after debug shell. do cmake again to debug )
       system "ninja"
       system "ninja", "install"
     end
