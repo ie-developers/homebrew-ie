@@ -20,6 +20,7 @@ class Cbclang < Formula
     sha256 cellar: :any_skip_relocation, mojave: "849051152676d540389fbe4029f430dc194bce4035936f6724761b2d7a0c1a70" 
     sha256 cellar: :any_skip_relocation, arm64_big_sur: "934140268cd63de051b90f371a88ca6a9d4d44c32767b8278950abb3e5ea55d4" 
     sha256 cellar: :any_skip_relocation, arm64_monterey: "9c962b229614a2b9975d228913b75c7310cb0206438c8273a0baa39a0e6885d7"
+    sha256 cellar: :any_skip_relocation, ventura: "1d3160662cf70b494a8a9a5386031a6172e98510986929a8287db465bfde8a4d"
   end
 
   keg_only "conflict with original clang"
@@ -41,11 +42,17 @@ class Cbclang < Formula
         ENV["LLVM_DIR"] = buildpath
         ENV["PATH"] = "#{ENV["PATH"]}:/usr/local/bin"
       end
+      macos_sdk = MacOS.sdk_path
+      print [ "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
+             "-DLLVM_INCLUDE_TESTS=OFF", "-DLLVM_INCLUDE_EXAMPLES=OFF", "-DLLVM_INCLUDE_DOCS=OFF",
+             "-DCMAKE_INSTALL_LIBDIR=lib",  "-DCMAKE_FIND_FRAMEWORK=LAST",
+             "-DCMAKE_VERBOSE_MAKEFILE=ON","-Wno-dev","-DCMAKE_OSX_SYSROOT=${macos_sdk}",
+             "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm/" ].join(" ")
+      puts ""
       system "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
              "-DLLVM_INCLUDE_TESTS=OFF", "-DLLVM_INCLUDE_EXAMPLES=OFF", "-DLLVM_INCLUDE_DOCS=OFF",
-             "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm/"
-      puts "cmake", "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}",
-             "-DLLVM_INCLUDE_TESTS=OFF", "-DLLVM_INCLUDE_EXAMPLES=OFF", "-DLLVM_INCLUDE_DOCS=OFF",
+             "-DCMAKE_INSTALL_LIBDIR=lib",  "-DCMAKE_FIND_FRAMEWORK=LAST",
+             "-DCMAKE_VERBOSE_MAKEFILE=ON","-Wno-dev","-DCMAKE_OSX_SYSROOT=${macos_sdk}",
              "-DLLVM_ENABLE_PROJECTS=clang;lld", "#{buildpath}/llvm/"
       ## puts "pwd = ",Dir.pwd,ENV["CXX"]  ( build dire is wrong after debug shell. do cmake again to debug )
       system "ninja"
